@@ -41,7 +41,7 @@ lines = []
 for file in list_of_files:
     # Преобразование имени файла в markdown
     f = open(os.path.join(path + file), "r")
-    newfile = file.rpartition('.')[0] + ".markdown"
+    newfile = datetime.datetime.now(pytz.timezone('Europe/Moscow')).strftime("%Y-%m-%d") + "-" + file.rpartition('.')[0] + ".markdown"
     fnew = open(os.path.join(path + newfile), "w")
     fnew.write(create_file_header(newfile))
     # append each line in the file to a list
