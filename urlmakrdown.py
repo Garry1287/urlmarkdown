@@ -4,6 +4,8 @@ import sys
 import datetime
 import pytz
 
+#python3 urlmarkdown.py /home/garry/from-notebook/it-garry/MyBlog/iptech-blog/test/
+
 # https://coderoad.ru/47204017/%D0%9E%D1%82%D0%BA%D1%80%D1%8B%D1%82%D0%B8%D0%B5-%D0%B8-%D1%87%D1%82%D0%B5%D0%BD%D0%B8%D0%B5-%D1%84%D0%B0%D0%B9%D0%BB%D0%BE%D0%B2-%D0%B2-%D0%BA%D0%B0%D1%82%D0%B0%D0%BB%D0%BE%D0%B3%D0%B5-%D0%B2-python-python-%D0%BD%D0%B0%D1%87%D0%B8%D0%BD%D0%B0%D1%8E%D1%89%D0%B8%D1%85
 # https://coderoad.ru/40279488/%D0%9A%D0%B0%D0%BA-%D0%BF%D1%80%D0%BE%D1%87%D0%B8%D1%82%D0%B0%D1%82%D1%8C-%D0%BC%D0%BD%D0%BE%D0%B3%D0%BE-txt-%D1%84%D0%B0%D0%B9%D0%BB%D0%BE%D0%B2-%D0%B2-%D0%BE%D0%BF%D1%80%D0%B5%D0%B4%D0%B5%D0%BB%D0%B5%D0%BD%D0%BD%D0%BE%D0%B9-%D0%BF%D0%B0%D0%BF%D0%BA%D0%B5-%D1%81-%D0%BF%D0%BE%D0%BC%D0%BE%D1%89%D1%8C%D1%8E-python
 # https://habr.com/ru/post/66931/ (по подошёл regex)
@@ -29,10 +31,11 @@ layout: post
 title:  "%s"
 date:   %s
 categories: %s
+tags: %s
 ---
 
 # %s
-""" % (FileName, MyDate.strftime("%Y-%m-%d %H:%M:%S %z"), FileName, FileName)
+""" % (FileName, MyDate.strftime("%Y-%m-%d %H:%M:%S %z"), FileName, FileName, FileName)
 
 
 # returns the names of the files in the directory data as a list
