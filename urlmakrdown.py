@@ -1,5 +1,6 @@
 import re
 import os
+import sys
 import datetime
 import pytz
 
@@ -17,21 +18,21 @@ import pytz
 # Наоборот
 # https://habr.com/ru/post/190304/
 
-path = "/home/garry/from-notebook/it-garry/MyBlog/iptech-blog/test/"
+path = sys.argv[1]
+#path = "/home/garry/from-notebook/it-garry/MyBlog/iptech-blog/test/"
 pattern = re.compile(r'(https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*))')
 
 
-def create_file_header(FileName):
+def create_file_header(FileName, MyDate):
     return """---
 layout: post
 title:  "%s"
 date:   %s
-categories: Git and docs
+categories: %s
 ---
 
 # %s
-
-""" % (FileName, datetime.datetime.now(pytz.timezone('Europe/Moscow')).strftime("%Y-%m-%d %H:%M:%S %z"), FileName)
+""" % (FileName, MyDate.strftime("%Y-%m-%d %H:%M:%S %z"), FileName, FileName)
 
 
 # returns the names of the files in the directory data as a list
@@ -40,9 +41,12 @@ lines = []
 for file in list_of_files:
     # Преобразование имени файла в markdown
     f = open(os.path.join(path + file), "r")
-    newfile = datetime.datetime.now(pytz.timezone('Europe/Moscow')).strftime("%Y-%m-%d") + "-" + file.rpartition('.')[0] + ".markdown"
+    MyDate = datetime.datetime.now(pytz.timezone('Europe/Moscow'))
+    # Формируем имя нового файла в виде дата-имя.markdown
+    newfile = MyDate.strftime("%Y-%m-%d") + "-" + file.rpartition('.')[0] + ".markdown"
     fnew = open(os.path.join(path + newfile), "w")
-    fnew.write(create_file_header(newfile))
+    # Записываем в новый файл хедер
+    fnew.write(create_file_header(file.rpartition('.')[0]), MyDate)
     # append each line in the file to a list
     lines = f.readlines()
     for line in lines:
