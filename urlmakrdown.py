@@ -25,7 +25,7 @@ path = sys.argv[1]
 pattern = re.compile(r'(https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*))')
 
 
-def create_file_header(FileName, MyDate):
+def create_file_header(FileName, MyDate, MyDir):
     return """---
 layout: post
 title:  "%s"
@@ -35,7 +35,7 @@ tags: %s
 ---
 
 # %s
-""" % (FileName, MyDate.strftime("%Y-%m-%d %H:%M:%S %z"), FileName, FileName, FileName)
+""" % (FileName, MyDate.strftime("%Y-%m-%d %H:%M:%S %z"), FileName, MyDir, FileName)
 
 
 # returns the names of the files in the directory data as a list
@@ -49,7 +49,7 @@ for file in list_of_files:
     newfile = MyDate.strftime("%Y-%m-%d") + "-" + file.rpartition('.')[0] + ".markdown"
     fnew = open(os.path.join(path + newfile), "w")
     # Записываем в новый файл хедер
-    fnew.write(create_file_header(file.rpartition('.')[0]), MyDate)
+    fnew.write(create_file_header(file.rpartition('.')[0]), MyDate, path.split("/")[-2])
     # append each line in the file to a list
     lines = f.readlines()
     for line in lines:
